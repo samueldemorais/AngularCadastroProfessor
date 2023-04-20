@@ -1,0 +1,46 @@
+<button mat-button [matMenuTriggerFor]="menu">Menu</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>Cadastrar Professor</button>
+  <button mat-menu-item>Listar Professor</button>
+</mat-menu>
+
+<br>
+<mat-card class="card-cadastro">
+  <mat-card-content>
+    <mat-form-field appearance="fill">
+      <input matInput [(ngModel)]="professorNovo.nome" placeholder="Digite o nome">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+      <input matInput [(ngModel)]="professorNovo.idade" placeholder="Digite a idade">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+      <input matInput [(ngModel)]="professorNovo.disciplina" placeholder="Nome da Disciplina">
+    </mat-form-field>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="cadastrar()">Cadastrar</button>
+  </mat-card-actions>
+</mat-card>
+<br>
+<div>
+  <mat-icon [matBadge]="professores.length" matBadgeColor="primary">people</mat-icon>
+</div>
+
+<mat-card class="card-professor" *ngFor="let professor of professores">
+  <mat-card-header>
+    <mat-card-title>{{professor.nome | titlecase}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    Professor de {{professor.disciplina}} Tem {{professor.idade}} anos
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="editar(professor)">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-button (click)="excluir(professor)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>
